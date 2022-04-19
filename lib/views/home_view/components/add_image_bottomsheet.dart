@@ -39,86 +39,92 @@ class _AddImageBottomSheetState extends State<AddImageBottomSheet> {
               filter: ImageFilter.blur(sigmaX: value, sigmaY: value),
               child: child);
         },
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 234,
-              child: AnimatedContainer(
-                duration: animationDuration,
-                curve: animationCurve,
-                padding: EdgeInsets.only(
-                    top: _open ? 0 : 16, bottom: _open ? 16 : 0),
-                width: MediaQuery.of(context).size.width,
-                child: AnimatedOpacity(
+        child: GestureDetector(
+          onTap: invertState,
+          behavior: HitTestBehavior.opaque,
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 234,
+                child: AnimatedContainer(
                   duration: animationDuration,
                   curve: animationCurve,
-                  opacity: _open ? 1 : 0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ChooseButton(
-                          icon: Icons.camera_alt,
-                          text: 'Câmera',
-                          onClick: widget.openCameraCallBack),
-                      const SizedBox(
-                        height: 23,
-                      ),
-                      ChooseButton(
-                          icon: Icons.photo_size_select_actual_outlined,
-                          text: 'Fotos',
-                          onClick: widget.openGalleryCallBack),
-                    ],
+                  padding: EdgeInsets.only(
+                      top: _open ? 0 : 16, bottom: _open ? 16 : 0),
+                  width: MediaQuery.of(context).size.width,
+                  child: AnimatedOpacity(
+                    duration: animationDuration,
+                    curve: animationCurve,
+                    opacity: _open ? 1 : 0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ChooseButton(
+                            icon: Icons.camera_alt,
+                            text: 'Câmera',
+                            onClick: widget.openCameraCallBack),
+                        const SizedBox(
+                          height: 23,
+                        ),
+                        ChooseButton(
+                            icon: Icons.photo_size_select_actual_outlined,
+                            text: 'Fotos',
+                            onClick: widget.openGalleryCallBack),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                height: 92,
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(61),
-                    topRight: Radius.circular(61),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: 92,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(61),
+                      topRight: Radius.circular(61),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 92 - (75 / 2),
-              left: MediaQuery.of(context).size.width / 2 - (75 / 2),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(90),
-                child: Material(
-                  child: InkWell(
-                    onTap: () => setState(() => _open = !_open),
-                    child: AnimatedContainer(
-                      width: 75,
-                      height: 75,
-                      color: _open ? Colors.grey : Colors.amber,
-                      duration: animationDuration,
-                      curve: animationCurve,
-                      child: AnimatedRotation(
-                        turns: _open ? 1 / 8 : 0,
+              Positioned(
+                bottom: 92 - (75 / 2),
+                left: MediaQuery.of(context).size.width / 2 - (75 / 2),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: Material(
+                    child: InkWell(
+                      onTap: invertState,
+                      child: AnimatedContainer(
+                        width: 75,
+                        height: 75,
+                        color: _open ? Colors.grey : Colors.amber,
                         duration: animationDuration,
                         curve: animationCurve,
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 36,
+                        child: AnimatedRotation(
+                          turns: _open ? 1 / 8 : 0,
+                          duration: animationDuration,
+                          curve: animationCurve,
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 36,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
+
+  void invertState() => setState(() => _open = !_open);
 }
