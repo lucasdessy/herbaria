@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:herbaria/views/home_view/home_view.dart';
+import 'package:herbaria/app.dart';
+import 'package:herbaria/init_getit.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(
-      home: HomeView(),
-    ),
-  );
+  configureDependencies();
+  runApp(const App());
 }
