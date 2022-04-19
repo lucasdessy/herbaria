@@ -16,6 +16,9 @@ class ChooseButton extends StatelessWidget {
           Radius.circular(15),
         ),
         child: InkWell(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
           onTap: onClick,
           child: SizedBox(
             width: 203,

@@ -40,38 +40,41 @@ class _AddImageBottomSheetState extends State<AddImageBottomSheet> {
               child: child);
         },
         child: GestureDetector(
-          onTap: invertState,
+          onTap: _open ? invertState : null,
           behavior: HitTestBehavior.opaque,
           child: Stack(
             children: [
               Positioned(
                 bottom: 234,
-                child: AnimatedContainer(
-                  duration: animationDuration,
-                  curve: animationCurve,
-                  padding: EdgeInsets.only(
-                      top: _open ? 0 : 16, bottom: _open ? 16 : 0),
-                  width: MediaQuery.of(context).size.width,
-                  child: AnimatedOpacity(
+                child: IgnorePointer(
+                  ignoring: !_open,
+                  child: AnimatedContainer(
                     duration: animationDuration,
                     curve: animationCurve,
-                    opacity: _open ? 1 : 0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ChooseButton(
-                            icon: Icons.camera_alt,
-                            text: 'Câmera',
-                            onClick: widget.openCameraCallBack),
-                        const SizedBox(
-                          height: 23,
-                        ),
-                        ChooseButton(
-                            icon: Icons.photo_size_select_actual_outlined,
-                            text: 'Fotos',
-                            onClick: widget.openGalleryCallBack),
-                      ],
+                    padding: EdgeInsets.only(
+                        top: _open ? 0 : 16, bottom: _open ? 16 : 0),
+                    width: MediaQuery.of(context).size.width,
+                    child: AnimatedOpacity(
+                      duration: animationDuration,
+                      curve: animationCurve,
+                      opacity: _open ? 1 : 0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ChooseButton(
+                              icon: Icons.camera_alt,
+                              text: 'Câmera',
+                              onClick: widget.openCameraCallBack),
+                          const SizedBox(
+                            height: 23,
+                          ),
+                          ChooseButton(
+                              icon: Icons.photo_size_select_actual_outlined,
+                              text: 'Fotos',
+                              onClick: widget.openGalleryCallBack),
+                        ],
+                      ),
                     ),
                   ),
                 ),
