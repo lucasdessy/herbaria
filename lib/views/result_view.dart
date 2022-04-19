@@ -83,7 +83,7 @@ class ResultView extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(top: 61),
               decoration: const BoxDecoration(
-                  color: HerbariaColors.grey,
+                  color: HerbariaColors.lightGreen,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(61),
                       topRight: Radius.circular(61))),
