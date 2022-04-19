@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+
 class ChooseButton extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -11,7 +13,7 @@ class ChooseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.green,
+        color: HerbariaColors.green,
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
@@ -29,11 +31,11 @@ class ChooseButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(icon, color: Colors.white),
+                  Icon(icon, color: HerbariaColors.white),
                   Text(
                     text,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: HerbariaColors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),

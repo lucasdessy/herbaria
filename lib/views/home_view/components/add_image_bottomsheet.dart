@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
 import 'choose_button.dart';
 
 class AddImageBottomSheet extends StatefulWidget {
@@ -85,7 +86,7 @@ class _AddImageBottomSheetState extends State<AddImageBottomSheet> {
                   width: double.infinity,
                   height: 92,
                   decoration: const BoxDecoration(
-                    color: Colors.green,
+                    color: HerbariaColors.green,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(61),
                       topRight: Radius.circular(61),
@@ -104,7 +105,8 @@ class _AddImageBottomSheetState extends State<AddImageBottomSheet> {
                       child: AnimatedContainer(
                         width: 75,
                         height: 75,
-                        color: _open ? Colors.grey : Colors.amber,
+                        color:
+                            _open ? HerbariaColors.grey : HerbariaColors.orange,
                         duration: animationDuration,
                         curve: animationCurve,
                         child: AnimatedRotation(
@@ -113,7 +115,7 @@ class _AddImageBottomSheetState extends State<AddImageBottomSheet> {
                           curve: animationCurve,
                           child: const Icon(
                             Icons.add,
-                            color: Colors.white,
+                            color: HerbariaColors.white,
                             size: 36,
                           ),
                         ),

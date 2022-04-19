@@ -6,5 +6,7 @@ class AnalyzerInitial extends AnalyzerState {}
 
 class AnalyzerLoaded extends AnalyzerState {
   String plantName;
-  AnalyzerLoaded(this.plantName);
+  String precision;
+  String description;
+  AnalyzerLoaded(this.plantName, this.precision, this.description);
 }
