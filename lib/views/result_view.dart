@@ -13,7 +13,7 @@ class ResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final analyzerCubit = context.watch<AnalyzerCubit>();
-    // TODO: improve this
+    // TODO: improve handling of cubit state here.
     if (analyzerCubit.state is AnalyzerInitial) {
       return Container();
     }
