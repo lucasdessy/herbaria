@@ -1,5 +1,6 @@
 part of 'analyzer_cubit.dart';
 
+//TODO: Make AnalyzerError class and also its correspondent UI;
 abstract class AnalyzerState {}
 
 class AnalyzerInitial extends AnalyzerState {}
