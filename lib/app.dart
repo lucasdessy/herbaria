@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herbaria/blocs/analyzer/analyzer_cubit.dart';
+import 'package:herbaria/blocs/history/history_cubit.dart';
 import 'package:herbaria/init_getit.dart';
 import 'package:herbaria/views/result_view.dart';
 
@@ -21,6 +22,9 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<AnalyzerCubit>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<HistoryCubit>(),
+          )
         ],
         child: const AppNavigator(),
       ),
