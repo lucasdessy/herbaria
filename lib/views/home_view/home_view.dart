@@ -6,6 +6,8 @@ import 'package:herbaria/views/constants/herbaria_padding.dart';
 import 'package:herbaria/views/home_view/components/add_image_bottomsheet.dart';
 import 'package:herbaria/views/home_view/components/history_card.dart';
 
+import '../../models/history_item.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -19,8 +21,8 @@ class HomeView extends StatelessWidget {
           if (state is AnalyzerError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(
-                    'Ocorreu um erro ao analizar a imagem.\n${state.message}'),
+                content: Text('${state.exception.title}'
+                    '${state.exception.subTitle != null ? '\n${state.exception.subTitle}' : ''}'),
                 behavior: SnackBarBehavior.floating,
               ),
             );

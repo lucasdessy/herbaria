@@ -10,6 +10,6 @@ class AnalyzerLoaded extends AnalyzerState {
 }
 
 class AnalyzerError extends AnalyzerState {
-  String message;
-  AnalyzerError(this.message);
+  HerbariaException exception;
+  AnalyzerError(this.exception);
 }

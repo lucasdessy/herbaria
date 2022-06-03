@@ -1,40 +1,40 @@
 import 'package:crypto/crypto.dart';
 
 import 'package:dio/dio.dart';
+import 'package:herbaria/models/exceptions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
 class CameraGalleryRepository {
-  // TODO: specify Exceptions()
   final _picker = ImagePicker();
   final httpClient = Dio(BaseOptions(baseUrl: 'http://localhost'));
 
-  Future<AiResponse> openCamera() async {
+  Future<_AiResponse?> openCamera() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     if (pickedFile == null) {
-      throw Exception();
+      return null;
     }
     return _analyzeImage(pickedFile);
   }
 
-  Future<AiResponse> openGallery() async {
+  Future<_AiResponse?> openGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile == null) {
-      throw Exception();
+      return null;
     }
     return _analyzeImage(pickedFile);
   }
 
-  Future<AiResponse?> _checkIfFileExists(String fileName) async {
+  Future<_AiResponse?> _checkIfFileExists(String fileName) async {
     final response = await httpClient.post('/ai', data: {"filename": fileName});
     if (response.statusCode == 200) {
-      return AiResponse.fromJson(response.data as Map<String, dynamic>);
+      return _AiResponse.fromJson(response.data as Map<String, dynamic>);
     }
     return null;
   }
 
-  Future<AiResponse> _analyzeImage(XFile file) async {
+  Future<_AiResponse> _analyzeImage(XFile file) async {
     final fileBytes = await file.readAsBytes();
     final md5Hash = md5.convert(fileBytes);
     final String fileName = md5Hash.toString();
@@ -56,22 +56,27 @@ class CameraGalleryRepository {
       data: formData,
     );
     if (response.statusCode != 200) {
-      throw Exception();
+      throw HerbariaException(
+        "Ocorreu um erro ao comunicar com o servidor.",
+        "Tente novamente mais tarde",
+      );
     }
     aiResponse = await _checkIfFileExists(fileName);
     if (aiResponse != null) {
       return aiResponse;
     }
-    throw Exception();
+    throw HerbariaException(
+      "Ocorreu um erro interno.",
+    );
   }
 }
 
-class AiResponse {
+class _AiResponse {
   String plant;
   String accuracy;
-  AiResponse(this.plant, this.accuracy);
+  _AiResponse(this.plant, this.accuracy);
 
-  factory AiResponse.fromJson(Map<String, dynamic> json) {
-    return AiResponse(json["plant"].toString(), json["accuracy"].toString());
+  factory _AiResponse.fromJson(Map<String, dynamic> json) {
+    return _AiResponse(json["plant"].toString(), json["accuracy"].toString());
   }
 }

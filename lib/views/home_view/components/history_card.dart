@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herbaria/blocs/analyzer/analyzer_cubit.dart';
-import 'package:herbaria/blocs/history/history_cubit.dart';
 import 'package:herbaria/views/constants/colors.dart';
+import '../../../models/history_item.dart';
 
 class HistoryCard extends StatelessWidget {
   final HistoryItem item;
@@ -13,7 +13,6 @@ class HistoryCard extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        print('ontappado');
         context.read<AnalyzerCubit>().loadFromHistory(item);
       },
       child: Container(

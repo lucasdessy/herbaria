@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:herbaria/util/print.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+
+import '../../models/history_item.dart';
 
 part 'history_state.dart';
 

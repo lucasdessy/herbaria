@@ -14,7 +14,6 @@ class ResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     final analyzerCubit = context.watch<AnalyzerCubit>();
     final analyzerCubitState = analyzerCubit.state;
-    // TODO: improve handling of cubit state here.
     if (analyzerCubitState is AnalyzerLoaded) {
       return Scaffold(
         extendBodyBehindAppBar: true,
