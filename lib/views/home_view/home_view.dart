@@ -6,7 +6,7 @@ import 'package:herbaria/views/constants/herbaria_padding.dart';
 import 'package:herbaria/views/home_view/components/add_image_bottomsheet.dart';
 import 'package:herbaria/views/home_view/components/history_card.dart';
 
-import '../../models/history_item.dart';
+import '../constants/colors.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -36,38 +36,16 @@ class HomeView extends StatelessWidget {
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).padding.top + 16),
                 child: historyCubitState.history.isEmpty
-                    ?
-                    // HerbariaPadding(
-                    //     child: Center(
-                    //       child: Text(
-                    //         'Faça uma análise',
-                    //         style: Theme.of(context)
-                    //             .textTheme
-                    //             .headline4!
-                    //             .copyWith(color: HerbariaColors.black),
-                    //       ),
-                    //     ),
-                    //   )
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const HerbariaPadding(
-                            child: Text(
-                              'Últimas Análises',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                    ? HerbariaPadding(
+                        child: Center(
+                          child: Text(
+                            'Faça uma análise',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4!
+                                .copyWith(color: HerbariaColors.black),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          HistoryCard(
-                              item: HistoryItem('planta', '99,9', 'Descrição',
-                                  ['assets/flor_teste.png']))
-                        ],
+                        ),
                       )
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

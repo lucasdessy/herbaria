@@ -2,16 +2,18 @@ import 'package:bloc/bloc.dart';
 import 'package:herbaria/blocs/history/history_cubit.dart';
 import 'package:herbaria/models/exceptions.dart';
 import 'package:herbaria/repositories/camera_gallery_repository.dart';
+import 'package:herbaria/util/plant_cache.dart';
 import 'package:herbaria/util/print.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../models/ai_response.dart';
 import '../../models/history_item.dart';
 
 part 'analyzer_state.dart';
 
 @singleton
 class AnalyzerCubit extends Cubit<AnalyzerState> {
-  // TODO: Make a local plant cache for descriptions.
+  final PlantCache _plantCache = PlantCache();
   final CameraGalleryRepository _cameraGalleryRepository;
   final HistoryCubit _historyCubit;
   AnalyzerCubit(this._cameraGalleryRepository, this._historyCubit)
@@ -25,11 +27,7 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
   Future<void> openCamera() async {
     try {
       final result = await _cameraGalleryRepository.openCamera();
-      if (result == null) return;
-      final item = HistoryItem(result.plant, result.accuracy, 'Descrição',
-          ['assets/flor_teste.png']);
-      emit(AnalyzerLoaded(item));
-      _historyCubit.addNewItem(item);
+      _loadItemFromResponse(result);
     } on HerbariaException catch (err) {
       devPrint(err);
       emit(AnalyzerError(err));
@@ -42,11 +40,7 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
   Future<void> openGallery() async {
     try {
       final result = await _cameraGalleryRepository.openGallery();
-      if (result == null) return;
-      final item = HistoryItem(result.plant, result.accuracy, 'Descrição',
-          ['assets/flor_teste.png']);
-      emit(AnalyzerLoaded(item));
-      _historyCubit.addNewItem(item);
+      _loadItemFromResponse(result);
     } on HerbariaException catch (err) {
       devPrint(err);
       emit(AnalyzerError(err));
@@ -54,6 +48,14 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
       devPrint(err, trace);
       emit(AnalyzerError(HerbariaException.unknownError()));
     }
+  }
+
+  void _loadItemFromResponse(AiResponse? response) {
+    if (response == null) return;
+    final item =
+        HistoryItem(_plantCache[response.plantCode], response.accuracy);
+    emit(AnalyzerLoaded(item));
+    _historyCubit.addNewItem(item);
   }
 
   Future<void> loadFromHistory(HistoryItem item) async {

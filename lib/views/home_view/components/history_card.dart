@@ -29,14 +29,15 @@ class HistoryCard extends StatelessWidget {
         ),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          if (item.imagesAssetLocations.asMap().containsKey(0))
+          if (item.plant.imagesAssetLocations.asMap().containsKey(0))
             CircleAvatar(
               backgroundColor: HerbariaColors.green,
-              foregroundImage: AssetImage(item.imagesAssetLocations.first),
+              foregroundImage:
+                  AssetImage(item.plant.imagesAssetLocations.first),
             ),
           const Spacer(),
           Text(
-            item.plantName,
+            item.plant.plantTitle,
             style: const TextStyle(fontSize: 24),
             maxLines: 2,
           ),

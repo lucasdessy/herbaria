@@ -1,27 +1,21 @@
-import 'dart:convert';
+import 'package:herbaria/models/plant_cache_item.dart';
+import 'package:herbaria/util/plant_cache.dart';
 
 class HistoryItem {
-  String plantName;
+  PlantCacheItem plant;
   String precision;
-  String description;
-  List<String> imagesAssetLocations;
-  HistoryItem(this.plantName, this.precision, this.description,
-      this.imagesAssetLocations);
+  HistoryItem(this.plant, this.precision);
   Map<String, dynamic> toJson() {
     return {
-      'plantName': plantName,
+      'plantCode': plant.plantCode,
       'precision': precision,
-      'description': description,
-      'image': imagesAssetLocations,
     };
   }
 
   factory HistoryItem.fromJson(Map<String, dynamic> json) {
     return HistoryItem(
-      json['plantName'],
+      PlantCache()[json['plantCode'].toString()],
       json['precision'],
-      json['description'],
-      List.from(jsonDecode(json['imageAssetLocation'])),
     );
   }
 }

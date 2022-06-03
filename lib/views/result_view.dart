@@ -42,8 +42,8 @@ class ResultView extends StatelessWidget {
                 enableInfiniteScroll: false,
                 initialPage: 2,
               ),
-              items:
-                  analyzerCubitState.item.imagesAssetLocations.map((imageUrl) {
+              items: analyzerCubitState.item.plant.imagesAssetLocations
+                  .map((imageUrl) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
@@ -92,7 +92,7 @@ class ResultView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          analyzerCubitState.item.plantName,
+                          analyzerCubitState.item.plant.plantTitle,
                           style: const TextStyle(fontSize: 24),
                         ),
                         Text(
@@ -103,7 +103,7 @@ class ResultView extends StatelessWidget {
                           height: 27,
                         ),
                         Text(
-                          analyzerCubitState.item.description,
+                          analyzerCubitState.item.plant.description,
                           style: const TextStyle(fontSize: 16),
                           textAlign: TextAlign.start,
                         ),
