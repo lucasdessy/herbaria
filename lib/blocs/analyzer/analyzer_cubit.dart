@@ -26,6 +26,7 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
 
   Future<void> openCamera() async {
     try {
+      emit(AnalyzerLoading());
       final result = await _cameraGalleryRepository.openCamera();
       _loadItemFromResponse(result);
     } on HerbariaException catch (err) {
@@ -39,6 +40,7 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
 
   Future<void> openGallery() async {
     try {
+      emit(AnalyzerLoading());
       final result = await _cameraGalleryRepository.openGallery();
       _loadItemFromResponse(result);
     } on HerbariaException catch (err) {
@@ -51,7 +53,10 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
   }
 
   void _loadItemFromResponse(AiResponse? response) {
-    if (response == null) return;
+    if (response == null) {
+      emit(AnalyzerInitial());
+      return;
+    }
     final item =
         HistoryItem(_plantCache[response.plantCode], response.accuracy);
     emit(AnalyzerLoaded(item));

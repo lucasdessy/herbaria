@@ -1,3 +1,4 @@
 class HerbariaConfig {
-  static const baseUrl = 'http://localhost';
+  static const baseUrl =
+      'https://fabaceae.happymeadow-1c01b285.canadacentral.azurecontainerapps.io';
 }

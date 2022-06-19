@@ -15,6 +15,8 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final historyCubit = context.watch<HistoryCubit>();
     final historyCubitState = historyCubit.state;
+    final isAnalyzerLoading =
+        context.watch<AnalyzerCubit>().state is AnalyzerLoading;
     return Scaffold(
       body: BlocListener<AnalyzerCubit, AnalyzerState>(
         listener: (context, state) {
@@ -32,45 +34,50 @@ class HomeView extends StatelessWidget {
           height: double.infinity,
           child: Stack(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top + 16),
-                child: historyCubitState.history.isEmpty
-                    ? HerbariaPadding(
-                        child: Center(
-                          child: Text(
-                            'Faça uma análise',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4!
-                                .copyWith(color: HerbariaColors.black),
-                          ),
-                        ),
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const HerbariaPadding(
+              if (isAnalyzerLoading)
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+              else
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).padding.top + 16),
+                  child: historyCubitState.history.isEmpty
+                      ? HerbariaPadding(
+                          child: Center(
                             child: Text(
-                              'Últimas Análises',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              'Faça uma análise',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(color: HerbariaColors.black),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ...historyCubitState.history
-                              .map<Widget>(
-                                (e) => HistoryCard(item: e),
-                              )
-                              .toList(),
-                        ],
-                      ),
-              ),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const HerbariaPadding(
+                              child: Text(
+                                'Últimas Análises',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            ...historyCubitState.history
+                                .map<Widget>(
+                                  (e) => HistoryCard(item: e),
+                                )
+                                .toList(),
+                          ],
+                        ),
+                ),
               AddImageBottomSheet(
                 openCameraCallBack: context.read<AnalyzerCubit>().openCamera,
                 openGalleryCallBack: context.read<AnalyzerCubit>().openGallery,

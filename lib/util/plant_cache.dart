@@ -16,7 +16,8 @@ class PlantCache {
       case 'leucaena_leucocephala':
         return _LeucaenaLeucocephala();
     }
-    throw HerbariaException('Planta não encontrada no catálogo.');
+    throw HerbariaException('Planta não encontrada no catálogo.',
+        'A planta $key não foi encontrada no catálogo local do app.');
   }
 }
 
