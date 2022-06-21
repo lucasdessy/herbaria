@@ -4,11 +4,13 @@ import 'package:herbaria/util/plant_cache.dart';
 class HistoryItem {
   PlantCacheItem plant;
   String precision;
-  HistoryItem(this.plant, this.precision);
+  DateTime whenWasTaken;
+  HistoryItem(this.plant, this.precision, this.whenWasTaken);
   Map<String, dynamic> toJson() {
     return {
       'plantCode': plant.plantCode,
       'precision': precision,
+      'whenWasTaken': whenWasTaken.toIso8601String()
     };
   }
 
@@ -16,6 +18,7 @@ class HistoryItem {
     return HistoryItem(
       PlantCache()[json['plantCode'].toString()],
       json['precision'],
+      DateTime.parse(json['whenWasTaken']),
     );
   }
 }

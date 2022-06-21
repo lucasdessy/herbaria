@@ -74,8 +74,8 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
       return;
     }
 
-    final item =
-        HistoryItem(_plantCache[response.plantCode], response.accuracy);
+    final item = HistoryItem(
+        _plantCache[response.plantCode], response.accuracy, DateTime.now());
     emit(AnalyzerLoaded(item));
     _historyCubit.addNewItem(item);
   }

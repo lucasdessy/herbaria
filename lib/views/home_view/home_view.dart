@@ -5,6 +5,7 @@ import 'package:herbaria/blocs/history/history_cubit.dart';
 import 'package:herbaria/views/constants/herbaria_padding.dart';
 import 'package:herbaria/views/home_view/components/add_image_bottomsheet.dart';
 import 'package:herbaria/views/home_view/components/history_card.dart';
+import 'package:herbaria/views/result_view.dart';
 
 import '../constants/colors.dart';
 
@@ -28,6 +29,10 @@ class HomeView extends StatelessWidget {
                 behavior: SnackBarBehavior.floating,
               ),
             );
+          }
+          if (state is AnalyzerLoaded) {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => const ResultView()));
           }
         },
         child: SizedBox(

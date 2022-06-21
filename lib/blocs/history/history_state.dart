@@ -12,6 +12,7 @@ class HistoryState {
       newList.add(element);
     }
     newList.add(item);
+    newList.sort((a, b) => b.whenWasTaken.compareTo(a.whenWasTaken));
     return HistoryState.fromList(newList);
   }
 }

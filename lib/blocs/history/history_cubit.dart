@@ -19,13 +19,18 @@ class HistoryCubit extends HydratedCubit<HistoryState> {
   @override
   HistoryState? fromJson(Map<String, dynamic> json) {
     try {
-      final list = (json[keyName] as List<Map<String, dynamic>>);
+      devPrint('HistoryCubit: fromJson()');
+      devPrint(json);
+      final list = (json[keyName] as List);
       final formattedList = <HistoryItem>[];
       for (final element in list) {
-        formattedList.add(HistoryItem.fromJson(element));
+        formattedList
+            .add(HistoryItem.fromJson(element as Map<String, dynamic>));
       }
       return HistoryState.fromList(formattedList);
     } catch (err) {
+      devPrint(err);
+      devPrint('HistoryCubit: fromJson() error');
       return null;
     }
   }
@@ -33,11 +38,15 @@ class HistoryCubit extends HydratedCubit<HistoryState> {
   @override
   Map<String, dynamic>? toJson(HistoryState state) {
     try {
-      return {
+      devPrint('HistoryCubit: toJson()');
+      final json = {
         keyName:
             state.history.map<Map<String, dynamic>>((e) => e.toJson()).toList()
       };
+      devPrint(json);
+      return json;
     } catch (err) {
+      devPrint('HistoryCubit: toJson() error');
       return null;
     }
   }

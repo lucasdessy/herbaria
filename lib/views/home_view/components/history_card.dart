@@ -18,7 +18,7 @@ class HistoryCard extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 80,
-        margin: const EdgeInsets.only(right: 140),
+        margin: const EdgeInsets.only(right: 100, bottom: 20),
         padding: const EdgeInsets.only(left: 16),
         decoration: const BoxDecoration(
           color: HerbariaColors.lightGreen,
@@ -35,13 +35,14 @@ class HistoryCard extends StatelessWidget {
               foregroundImage:
                   AssetImage(item.plant.imagesAssetLocations.first),
             ),
-          const Spacer(),
-          Text(
-            item.plant.plantTitle,
-            style: const TextStyle(fontSize: 24),
-            maxLines: 2,
+          Flexible(
+            child: Text(
+              item.plant.plantTitle,
+              style: const TextStyle(fontSize: 24),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
           ),
-          const Spacer(),
         ]),
       ),
     );
