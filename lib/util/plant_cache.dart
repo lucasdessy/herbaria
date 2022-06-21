@@ -33,7 +33,7 @@ A folha possui ápice obtuso, curtamente mucronado
 Base da folha assimétrica, com margem inteira
 O fruto possui ápice acuminado
   ''',
-          ['assets/flor_teste.png'],
+          ['assets/CP.jpeg'],
         );
 }
 
@@ -46,7 +46,7 @@ class _CrotalariaRetusa extends PlantCacheItem {
 O pecíolo não é tão desenvolvido nesta espécie
 O ápice das folhas são mais arredondados
   ''',
-          ['assets/flor_teste.png'],
+          ['assets/CR.jpeg'],
         );
 }
 
@@ -61,7 +61,7 @@ Possui dois pares de folíolos
 Folha possui base assimétrica
 No fruto, há presença de muitos tricomas, estruturas parecidas com pelos
   ''',
-          ['assets/flor_teste.png'],
+          ['assets/CD.jpeg'],
         );
 }
 
@@ -74,7 +74,7 @@ class _HymeneaeVelutina extends PlantCacheItem {
 Caule em escama
 A folha possui dois folíolos
   ''',
-          ['assets/flor_teste.png'],
+          ['assets/HV.jpeg'],
         );
 }
 
@@ -88,6 +88,19 @@ Nectário presente no pecíolo
 Fruto possui ápice agudo
 As folhas são bipinadas
   ''',
-          ['assets/flor_teste.png'],
+          ['assets/LL.jpeg'],
+        );
+}
+
+// TODO: HC
+class _HC extends PlantCacheItem {
+  _HC()
+      : super(
+          'HC',
+          'HC',
+          ''' 
+
+  ''',
+          ['assets/HC.jpeg'],
         );
 }

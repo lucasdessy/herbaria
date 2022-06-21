@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:herbaria/blocs/history/history_cubit.dart';
 import 'package:herbaria/models/exceptions.dart';
 import 'package:herbaria/repositories/camera_gallery_repository.dart';
+import 'package:herbaria/util/config.dart';
 import 'package:herbaria/util/plant_cache.dart';
 import 'package:herbaria/util/print.dart';
 import 'package:injectable/injectable.dart';
@@ -57,6 +58,22 @@ class AnalyzerCubit extends Cubit<AnalyzerState> {
       emit(AnalyzerInitial());
       return;
     }
+    devPrint(response);
+    final acc = double.tryParse(response.accuracy);
+    if (acc == null) {
+      emit(AnalyzerInitial());
+      return;
+    }
+    if (acc < HerbariaConfig.minAcc) {
+      emit(
+        AnalyzerError(
+          HerbariaException('Não foi possível identificar a planta na foto.',
+              'Acurácia muito baixa: ${acc.toStringAsFixed(1)}%'),
+        ),
+      );
+      return;
+    }
+
     final item =
         HistoryItem(_plantCache[response.plantCode], response.accuracy);
     emit(AnalyzerLoaded(item));
